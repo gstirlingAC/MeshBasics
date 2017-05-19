@@ -16,11 +16,12 @@ public class Grid : MonoBehaviour {
         ySize = 5;
 
         // Call a function to generate the grid
-        Generate();
+        StartCoroutine(Generate());
 	}
 
-    private void Generate()
+    private IEnumerator Generate()
     {
+        WaitForSeconds wait = new WaitForSeconds(0.05f);
         // The amount of vertices depends on the size of the grid.
         // We need a vertex at the corners of every quad, but
         // adjacent quads share the same vertex. So we need one more
@@ -33,6 +34,7 @@ public class Grid : MonoBehaviour {
             for (int x = 0; x <= xSize; x++, i++)
             {
                 vertices[i] = new Vector3(x, y);
+                yield return wait;
             }
         }
 
